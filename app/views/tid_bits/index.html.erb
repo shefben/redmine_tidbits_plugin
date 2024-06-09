@@ -1,0 +1,63 @@
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'tid_bits', :plugin => 'tid_bits' %>
+<% end %>
+
+<div id="content">
+  <div class="contextual">
+    <%= link_to l(:label_tid_bit_new), new_project_tid_bit_path(@project), class: 'icon icon-add new-issue' %>
+  </div>
+
+  <h2>Tid-Bits</h2>
+
+  <div class="issue-search">
+    <%= form_tag project_tid_bits_path(@project), method: :get do %>
+      <div class="row">
+        <div class="small-10 columns">
+          <%= text_field_tag :search, params[:search], placeholder: "Search...", class: "small" %>
+          <%= select_tag :tag, options_for_select(@project.tid_bits.joins(:tid_bit_tag).distinct.pluck('tid_bit_tags.name'), params[:tag]), prompt: "Select Tag", class: "small" %>
+          <%= select_tag :sort, options_for_select([['ID', 'id'], ['Subject', 'subject'], ['Created At', 'created_at']], params[:sort]), prompt: "Sort By", class: "small" %>
+        </div>
+        <div class="small-2 columns">
+          <%= submit_tag "Search", class: "small button" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <table class="list issues">
+    <thead>
+      <tr>
+        <th><%= sort_link @query, 'id', caption: "#" %></th>
+        <th><%= sort_link @query, 'subject', caption: "Subject" %></th>
+        <th><%= sort_link @query, 'user', caption: "Submitted By" %></th>
+        <th><%= sort_link @query, 'created_at', caption: "Created At" %></th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tid_bits.each do |tid_bit| %>
+        <tr>
+          <td><%= tid_bit.id %></td>
+          <td>
+            <% if tid_bit.tid_bit_tag.present? %>
+              <span style="color: <%= tid_bit.tid_bit_tag.color %>;">[<%= tid_bit.tid_bit_tag.name %>]</span>
+            <% end %>
+            <%= link_to tid_bit.subject, project_tid_bit_path(@project, tid_bit) %>
+          </td>
+          <td><%= tid_bit.user %></td>
+          <td><%= tid_bit.created_at %></td>
+          <td>
+            <% if User.current.admin? || User.current == tid_bit.user %>
+              <%= link_to 'Edit', edit_project_tid_bit_path(@project, tid_bit) %> |
+              <%= link_to 'Delete', project_tid_bit_path(@project, tid_bit), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <%= will_paginate @tid_bits %>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<%= form_with(model: [@project, @tag], local: true) do |f| %>
+  <div class="box tabular">
+    <p>
+      <%= f.label :name, l(:field_name) %><br>
+      <%= f.text_field :name %>
+    </p>
+    <p>
+      <%= f.label :color, l(:field_color) %><br>
+      <%= f.select :color, options_for_select([
+          ['Red', '#FF0000'],
+          ['Green', '#008000'],
+          ['Blue', '#0000FF'],
+          ['Yellow', '#FFFF00'],
+          ['Purple', '#800080'],
+          ['Orange', '#FFA500'],
+          ['Black', '#000000'],
+          ['White', '#FFFFFF']
+        ], @tag.color), { prompt: 'Select Color' }, { class: 'color-dropdown' } %>
+    </p>
+    <p>
+      <%= f.submit l(:button_save) %>
+    </p>
+  </div>
+<% end %>

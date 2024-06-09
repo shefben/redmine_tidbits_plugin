@@ -1,0 +1,118 @@
+.issue-search {
+  margin-bottom: 20px;
+}
+
+.issue-search .row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.issue-search .small {
+  margin-right: 10px;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #f4f4f4;
+}
+
+.new-issue {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+/* Add any additional CSS for BBCode editor here */
+.bbcode-toolbar button {
+  background-color: transparent;
+  border: none;
+  width: 24px;
+  height: 24px;
+  background-size: cover;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.bbcode-toolbar button:hover {
+  background-color: #ddd;
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+.actions input[type="submit"] {
+  display: block;
+  margin: 0 auto;
+}
+
+#editor-tab, #preview-tab {
+  display: inline-block;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-bottom: none;
+}
+
+#editor-tab.selected, #preview-tab.selected {
+  background-color: #fff;
+  border-bottom: 1px solid #fff;
+}
+
+#editor-content, #preview-content {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #fff;
+}.color-dropdown option {
+  background-color: white;
+}
+
+.color-dropdown option[value="#FF0000"] {
+  color: #FF0000;
+}
+
+.color-dropdown option[value="#008000"] {
+  color: #008000;
+}
+
+.color-dropdown option[value="#0000FF"] {
+  color: #0000FF;
+}
+
+.color-dropdown option[value="#FFFF00"] {
+  color: #FFFF00;
+}
+
+.color-dropdown option[value="#800080"] {
+  color: #800080;
+}
+
+.color-dropdown option[value="#FFA500"] {
+  color: #FFA500;
+}
+
+.color-dropdown option[value="#000000"] {
+  color: #000000;
+}
+
+.color-dropdown option[value="#FFFFFF"] {
+  color: #FFFFFF;
+}

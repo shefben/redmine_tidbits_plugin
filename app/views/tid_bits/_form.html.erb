@@ -1,0 +1,47 @@
+<%= stylesheet_link_tag 'tid_bits', plugin: 'tid_bits' %>
+<%= javascript_include_tag 'tid_bits', plugin: 'tid_bits' %>
+<%= form_with(model: [@project, @tid_bit], local: true) do |f| %>
+  <% if @tid_bit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tid_bit.errors.count, "error") %> prohibited this tid_bit from being saved:</h2>
+
+      <ul>
+        <% @tid_bit.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tag %><br>
+    <%= f.collection_select :tid_bit_tag_id, TidBitTag.all, :id, :name, include_blank: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subject %><br>
+    <%= f.text_field :subject, size: 60 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :body %><br>
+    <div id="tabs">
+      <div id="editor-tab" class="selected">Editor</div>
+      <div id="preview-tab">Preview</div>
+    </div>
+    <div id="editor-content">
+      <div class="bbcode-toolbar"></div>
+      <%= f.text_area :body, rows: 20, cols: 80 %>
+    </div>
+    <div id="preview-content" style="display: none;"></div>
+  </div>
+
+  <div class="field">
+    <%= f.label :attachments %><br>
+    <%= file_field_tag 'tid_bit[attachments][]', multiple: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
